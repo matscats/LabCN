@@ -16,7 +16,7 @@ def pegarDados(caminho):
     r = 40.90282037
     return {'pos':np.array([x, y]), 'r':r}
 
-r = 1 #px
+r = 40.90282037 #px
 
 #Xo e Yo servem caso se faça um imshow de um frame do vídeo no gráfico.
 #Xo e Yo exp. são pegarDados(caminho)['x'][0] e pegarDados(caminho)['y'][6].
@@ -64,16 +64,16 @@ def altTaylorY(t0: float, n: int, t: float, opt:bool = False) -> float:
     return a
 
 def TaylorX(t0: float, n: int, t: float) -> float:
-    a = X(t0) + r*(1-np.cos(t))*(t-t0) # Termo inicial    
+    a = X(t0) + r*(1-np.cos(t0))*(t-t0) # Termo inicial    
     for i in range(2,n+1):
         if i%4==0:
-            a -= r*np.sin(t0)*(t-t0)**i/factorial(i)
+            a += -r*np.sin(t0)*((t-t0)**i)/factorial(i)
         if i%4==1:
-            a -= r*np.cos(t0)*(t-t0)**i/factorial(i)
+            a += -r*np.cos(t0)*((t-t0)**i)/factorial(i)
         if i%4==2:
-            a += r*np.sin(t0)*(t-t0)**i/factorial(i)
+            a += r*np.sin(t0)*((t-t0)**i)/factorial(i)
         if i%4==3:
-            a += r*np.cos(t0)*(t-t0)**i/factorial(i)       
+            a += r*np.cos(t0)*((t-t0)**i)/factorial(i)       
     return a
 
 def TaylorY(t0: float, n: int, t: float) -> float:
@@ -93,8 +93,9 @@ def Plot(t0: float, n: int, t: float):
     t_ = np.linspace(t0, t, n+1) # Domínio
     x = X(t_)
     y = Y(t_)
-    plt.scatter(t_, x, label='x(t)')
-    plt.scatter(t_, y, label='y(t)')
+    #plt.scatter(t_, x, label='x(t)')
+    #plt.scatter(t_, y, label='y(t)')
+    plt.plot(x,y)
     plt.legend()
     plt.show()
     
@@ -122,3 +123,8 @@ def altPlot(t0: float, n: int, t: float, ideal:bool =True,
     plt.axis('equal')
     plt.show()
     
+def main():
+    Plot(0,1000,4*np.pi)
+
+if __name__ == '__main__':
+    main()
