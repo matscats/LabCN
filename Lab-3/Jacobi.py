@@ -22,7 +22,7 @@ def Jacobi(C, b, erro):
                 break          
         return x, cont, ErroRelativo(x,y)
     else:
-        return 'A matriz não converge pelo critério das linhas ou colunas' 
+        return 'Teste inconclusivo' 
 
 x = Jacobi(C, b, 0.001)
 

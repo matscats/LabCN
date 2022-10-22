@@ -16,4 +16,5 @@ plt.imshow(imggray, cmap="gray")
 t = imggray.shape
 imgruido = imggray + np.random.rand(t[0],t[1])
 plt.imshow(imgruido, cmap="gray")
+plt.show()
 
