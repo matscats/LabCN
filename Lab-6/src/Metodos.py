@@ -10,7 +10,7 @@ def euler(a : float, b : float, h : float, omega_0 : float, theta_0 : float) -> 
     for i in range(0,len(t) - 1):
         theta[i+1] = theta[i] + h * df1(omega[i], theta[i], t[i])
         omega[i+1] = omega[i] + h * df2(omega[i], theta[i], t[i])
-    return theta, omega, t
+    return theta, t
 
 def rk2(a : float, b : float, h : float, omega_0 : float, theta_0 : float) -> list[float]:
     t = np.arange(a, b + h, h)
@@ -26,7 +26,6 @@ def rk2(a : float, b : float, h : float, omega_0 : float, theta_0 : float) -> li
         omega_k2 = df2(omega[i] +  omega_k1 * h, theta[i] +  omega_k1 * h, t[i] + h)
         theta[i+1] = theta[i] + h * (theta_k1 + theta_k2)/2
         omega[i+1] = omega[i] + h * (omega_k1 + omega_k2)/2
-        y[i] = l * np.cos(theta[i])
-    return theta, omega, t
+    return theta, t
 
 
